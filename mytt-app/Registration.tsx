@@ -1,7 +1,9 @@
 import React, {Component, createRef, RefObject} from 'react';
 import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import CheckBox from 'react-native-check-box';
+import {Picker} from '@react-native-picker/picker';
+type Props = {};
 
 type State = {
     firstName: string,
@@ -20,20 +22,11 @@ type State = {
     emergencyContactName: string,
     emergencyContactPhone: number,
     emergencyContactRelationship: string, // TODO: enum
+    isAgeDropdownFocused: boolean,
     activeIndex: number | null;
-    // showEmailError: boolean;
-    // showPasswordError: boolean;
-    // showFirstnameError: boolean;
-    // showLastnameError: boolean;
-    // showOccupationError: boolean;
-    // showAddressError: boolean;
-    // showZipError: boolean;
-    // showPhoneError: boolean;
 };
 
-
-
-export default class RegistrationScreen extends Component<{}, State> {
+export default class RegistrationScreen extends Component<Props, State> {
     firstNameInputRef: RefObject<TextInput>;
     lastNameInputRef: RefObject<TextInput>;
     emailInputRef: RefObject<TextInput>;
@@ -53,7 +46,7 @@ export default class RegistrationScreen extends Component<{}, State> {
 
     _scrollViewRef: RefObject<KeyboardAwareScrollView>;
 
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             firstName: '',
@@ -72,17 +65,9 @@ export default class RegistrationScreen extends Component<{}, State> {
             emergencyContactName: '',
             emergencyContactPhone: 0,
             emergencyContactRelationship: '',
+            isAgeDropdownFocused: false,
 
             activeIndex: null,
-
-            // showEmailError: false,
-            // showPasswordError: false,
-            // showFirstnameError: false,
-            // showLastnameError: false,
-            // showOccupationError: false,
-            // showAddressError: false,
-            // showZipError: false,
-            // showPhoneError: false,
         };
         this.submitPressed = this.submitPressed.bind(this);
 
@@ -129,16 +114,17 @@ export default class RegistrationScreen extends Component<{}, State> {
 
     editNextInput = () => {
         console.log("editNextInput")
-        const activeIndex = this.getActiveInputIndex();
-        if (activeIndex === -1) {
+        if (this.state.activeIndex === -1) {
             return;
         }
 
-        const nextIndex = activeIndex + 1;
-        if (nextIndex < this.inputs().length && this.inputs()[nextIndex].current != null) {
-            this.setFocus(this.inputs()[nextIndex], true);
-        } else {
-            this.finishEditing();
+        if (this.state.activeIndex !== null) {
+            const nextIndex = this.state.activeIndex + 1;
+            if (nextIndex < this.inputs().length && this.inputs()[nextIndex].current != null) {
+                this.setFocus(this.inputs()[nextIndex], true);
+            } else {
+                this.finishEditing();
+            }
         }
     }
 
@@ -184,16 +170,6 @@ export default class RegistrationScreen extends Component<{}, State> {
 
     submitPressed() {
         console.log("submitPressed this.state: ", this.state);
-        // this.setState({
-        //     showEmailError: this.state.email.length < 4,
-        //     showPasswordError: this.state.password.length < 4,
-        //     showFirstnameError: this.state.firstname.length < 4,
-        //     showLastnameError: this.state.lastname.length < 4,
-        //     showOccupationError: this.state.occupation.length < 4,
-        //     showAddressError: this.state.address.length < 4,
-        //     showZipError: this.state.zip.length < 4,
-        //     showPhoneError: this.state.phone.length < 4,
-        // });
         Keyboard.dismiss();
     }
 
@@ -212,7 +188,6 @@ export default class RegistrationScreen extends Component<{}, State> {
                 extraHeight={32}
                 extraScrollHeight={Platform.OS == "android" ? 32 : 0}
                 enableResetScrollToCoords={false}
-                // onKeyboardDidShow={this._keyboardDidShowHandler}
             >
                 <View style={styles.container}>
 
@@ -220,23 +195,7 @@ export default class RegistrationScreen extends Component<{}, State> {
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Email"
-                            style={styles.textInput}
-                            returnKeyType="next"
-                            onSubmitEditing={this.editNextInput}
-                            onFocus={this.onInputFocus}
-                            onChangeText={this.onChangeInputHandler('email')}
-                            ref={this.emailInputRef}
-                            value={this.state.email}
-                        />
-                        {/*{this.state.showEmailError*/}
-                        {/*    <Text style={styles.errorText}>Please enter your email address.</Text>*/}
-                        {/*}*/}
-                    </View>
-
-                    <View style={styles.inputTextWrapper}>
-                        <TextInput
-                            placeholder="First Name"
+                            placeholder="First Name (required)"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -244,14 +203,11 @@ export default class RegistrationScreen extends Component<{}, State> {
                             onChangeText={this.onChangeInputHandler('firstName')}
                             ref={this.firstNameInputRef}
                         />
-                        {/*{this.state.showFirstnameError &&*/}
-                        {/*    <Text style={styles.errorText}>Please enter your first name.</Text>*/}
-                        {/*}*/}
                     </View>
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Last Name"
+                            placeholder="Last Name (required)"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -263,19 +219,35 @@ export default class RegistrationScreen extends Component<{}, State> {
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Marketing Emails - CHANGE TO CHECKBOX "
+                            placeholder="Email (required)"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
                             onFocus={this.onInputFocus}
-                            onChangeText={this.onChangeInputHandler('marketingEmails')}
-                            ref={this.lastNameInputRef}
+                            onChangeText={this.onChangeInputHandler('email')}
+                            ref={this.emailInputRef}
+                            value={this.state.email}
                         />
                     </View>
 
+                    <Text style={styles.subtext}>This will be used for your confirmation email.</Text>
+
+                    <CheckBox
+                        style={{flex: 1, padding: 10}}
+                        onClick={()=>{
+                            this.setState({
+                                marketingEmails:!this.state.marketingEmails
+                            })
+                        }}
+                        isChecked={this.state.marketingEmails}
+                        leftText={"Opt Into Marketing Emails?"}
+                    />
+
+                    <Text style={styles.subheader}>Child Registration</Text>
+
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Child First Name"
+                            placeholder="First Name"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -287,7 +259,7 @@ export default class RegistrationScreen extends Component<{}, State> {
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Child Last Name"
+                            placeholder="Last Name"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -297,21 +269,25 @@ export default class RegistrationScreen extends Component<{}, State> {
                         />
                     </View>
 
-                    <View style={styles.inputTextWrapper}>
-                        <TextInput
-                            placeholder="Child Age"
-                            style={styles.textInput}
-                            returnKeyType="next"
-                            onSubmitEditing={this.editNextInput}
-                            onFocus={this.onInputFocus}
-                            onChangeText={this.onChangeInputHandler('childAge')}
-                            ref={this.lastNameInputRef}
-                        />
-                    </View>
+                    <Text style={styles.subtext}>Child Age</Text>
+
+                    <Picker
+                        selectedValue={this.state.childAge}
+                        onValueChange={(item) =>
+                            this.setState({
+                                childAge: Number(item),
+                            })
+                        }
+                    >
+                        <Picker.Item label="9" value="9" />
+                        <Picker.Item label="10" value="10" />
+                        <Picker.Item label="11" value="11" />
+                        <Picker.Item label="12" value="12" />
+                    </Picker>
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="Child Ethnicity"
+                            placeholder="Ethnicity"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -321,17 +297,16 @@ export default class RegistrationScreen extends Component<{}, State> {
                         />
                     </View>
 
-                    <View style={styles.inputTextWrapper}>
-                        <TextInput
-                            placeholder="Liability Waiver"
-                            style={styles.textInput}
-                            returnKeyType="next"
-                            onSubmitEditing={this.editNextInput}
-                            onFocus={this.onInputFocus}
-                            onChangeText={this.onChangeInputHandler('liabilityWaiver')}
-                            ref={this.lastNameInputRef}
-                        />
-                    </View>
+                    <CheckBox
+                        style={{flex: 1, padding: 10}}
+                        onClick={()=>{
+                            this.setState({
+                                liabilityWaiver:!this.state.liabilityWaiver
+                            })
+                        }}
+                        isChecked={this.state.liabilityWaiver}
+                        leftText={"Do you agree to the Liability Waiver?"}
+                    />
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
@@ -371,7 +346,7 @@ export default class RegistrationScreen extends Component<{}, State> {
 
                     <View style={styles.inputTextWrapper}>
                         <TextInput
-                            placeholder="How did you hear about us? - CHANGE TO BIG TEXT BOX"
+                            placeholder="How did you hear about us?"
                             style={styles.textInput}
                             returnKeyType="next"
                             onSubmitEditing={this.editNextInput}
@@ -427,7 +402,7 @@ export default class RegistrationScreen extends Component<{}, State> {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TODO: update styling
     container: {
         flex: 1,
         padding: 16,
@@ -439,7 +414,22 @@ const styles = StyleSheet.create({
         margin: 12,
         textAlign: "center",
     },
+    subheader: {
+        fontSize: 24,
+        padding: 24,
+        margin: 12,
+        textAlign: "center",
+    },
+    subtext: {
+        fontSize: 12,
+        padding: 4,
+        margin: 4,
+        textAlign: "center",
+    },
     inputTextWrapper: {
+        marginBottom: 24,
+    },
+    checkboxContainer: {
         marginBottom: 24,
     },
     textInput: {
