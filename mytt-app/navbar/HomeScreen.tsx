@@ -144,10 +144,7 @@ const HomeScreen = () => {
         {filteredPrograms.map((program) => (
         <TouchableOpacity
             key={program.id}
-            onPress={() => {
-            console.log('Trying to navigate to ProgramDetails with program:', program);
-            navigation.navigate('ProgramDetails', { program });
-            }}
+            onPress={() => {navigation.navigate('ProgramDetails', { program });}}
         >
             <ProgramCard program={program} />
         </TouchableOpacity>
