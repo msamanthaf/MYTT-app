@@ -8,7 +8,7 @@ export interface Program {
     photoUri: string;
     category: string;
     age?: string;             
-    location?: string;        
+    location: string;        
     capacity?: number;        
 }
   
