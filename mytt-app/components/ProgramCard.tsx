@@ -9,8 +9,14 @@ const ProgramCard: React.FC<{ program: Program }> = ({ program }) => {
       <View style={styles.cardContent}>
         <Text style={styles.cardName}>{program.name}</Text>
         <Text style={styles.cardDescription}>{program.description}</Text>
-        <Text style={styles.cardDate}>{program.date}</Text>
-        <Text style={styles.cardPrice}>{program.price}</Text>
+        <View style={styles.cardRow}>
+          <Image source={require('../assets/Vectordate.png')} style={styles.icon} />
+          <Text style={styles.cardDate}>{program.date}</Text>
+        </View>
+        <View style={styles.cardRow}>
+          <Image source={require('../assets/Vectorprice.png')} style={styles.icon} />
+          <Text style={styles.cardPrice}>{program.price}</Text>
+        </View>
       </View>
     </View>
   );
@@ -18,15 +24,14 @@ const ProgramCard: React.FC<{ program: Program }> = ({ program }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fafafa',
     borderRadius: 8,
     marginVertical: 8,
     overflow: 'hidden',
-    elevation: 1,
-    shadowColor: '#000', // iOS shadow
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+	width:'90%',
+	justifyContent: 'center',
+	alignSelf: 'center',
+	marginBottom: 20,
   },
   cardImage: {
     width: '100%',
@@ -38,17 +43,31 @@ const styles = StyleSheet.create({
   cardName: {
     fontWeight: 'bold',
     fontSize: 18,
+	color:'#2166DE',
   },
   cardDescription: {
     fontSize: 14,
-    color: '#666',
+    color: '#717171',
+	paddingVertical:10,
   },
   cardDate: {
     fontSize: 14,
+	paddingBottom:5,
+	fontWeight: 'bold',
   },
   cardPrice: {
     fontSize: 14,
     fontWeight: 'bold',
+  },
+  cardRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
   },
 });
 
