@@ -6,11 +6,8 @@ import { RootStackParamList } from '../navbar/HomeScreen';
 import RegistrationScreen from '../Registration';
 import { useNavigation } from '@react-navigation/native';
 
-export type RootStackParamList = {
-    RegistrationScreen: undefined;
-    RegistrationDetails: undefined;
-}
-type RegistrationNavigationProp = StackNavigationProp<RootStackParamList, 'RegistrationScreen'>;
+
+type ProgramDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'ProgramDetails'>;
 
 const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
     const program: Program = route.params.program;
@@ -19,7 +16,7 @@ const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
     email: 'jane.doe@example.com',
     number: '555-1234',
   };
-  const navigation = useNavigation<RegistrationNavigationProp>();
+  const navigation = useNavigation<ProgramDetailsNavigationProp>();
 
   return (
     <ScrollView style={styles.container}>
@@ -41,7 +38,7 @@ const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
           <Text>{host.email}</Text>
           <Text>{host.number}</Text>
         </View>
-        <Button title="Register" onPress={() => {navigation.navigate('RegistrationDetails')}} />
+        <Button title="Register" onPress={() => navigation.navigate('RegistrationScreen')} />
       </View>
     </ScrollView>
   );
