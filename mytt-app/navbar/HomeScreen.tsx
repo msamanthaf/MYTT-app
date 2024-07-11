@@ -12,7 +12,6 @@ export type RootStackParamList = {
 };
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
-
 const programs: Program[] = [
     {
       id: 1,
