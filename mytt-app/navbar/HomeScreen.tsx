@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { Program } from '../models';
-import ProgramCard from '../componets/ProgramCard';
+import ProgramCard from '../components/ProgramCard';
 
 const programs: Program[] = [
     {
