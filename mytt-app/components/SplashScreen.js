@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Image, StyleSheet, Animated, Easing, Text } from "react-native";
+import { View, Text, Image, StyleSheet, Animated, Easing } from "react-native";
 import * as Font from "expo-font";
+import { GoogleButton } from "./GoogleButton";
 
-const SplashScreen = () => {
+const SplashScreen = ({ loginWithGoogle }) => {
 	const [fadeAnim] = useState(new Animated.Value(0));
 	const [positionAnim] = useState(new Animated.Value(0));
 	const [buttonFadeAnim] = useState(new Animated.Value(0));
@@ -58,11 +59,16 @@ const SplashScreen = () => {
 			>
 				<Image
 					source={require("../assets/MYTT_Logo.png")}
-					style={{ width: 154, height: 93 }}
+					style={styles.image}
 					resizeMode="contain"
 				/>
 			</Animated.View>
-			{/* <Text style={styles.text}>Welcome to the MYTT App</Text> */}
+			<Animated.View style={{ opacity: buttonFadeAnim }}>
+				<GoogleButton
+					text="Login with Google"
+					onPress={loginWithGoogle}
+				/>
+			</Animated.View>
 		</View>
 	);
 };
@@ -70,13 +76,7 @@ const SplashScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	backgroundImage: {
-		flex: 1,
-		width: "100%",
-		height: "100%",
+		backgroundColor: "#2166DE",
 		justifyContent: "center",
 		alignItems: "center",
 	},
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	image: {
-		width: 280,
-		height: 280,
+		width: 154,
+		height: 93,
 	},
 	text: {
-		fontSize: 20,
+		fontSize: 50,
 		color: "#F7F7E1",
 		fontFamily: "Poppins",
 		fontWeight: "bold",
