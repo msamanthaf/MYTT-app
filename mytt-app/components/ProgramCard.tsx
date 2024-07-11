@@ -13,10 +13,7 @@ const ProgramCard: React.FC<{ program: Program }> = ({ program }) => {
     <View style={styles.card}>
       <Image source={{ uri: program.photoUri }} style={styles.cardImage} />
 	  <TouchableOpacity style={styles.bookmarkButton} onPress={toggleBookmark}>
-        <Image
-          source={isBookmarked ? require('../assets/bookmarkActive.png') : require('../assets/bookmarkInactive.png')}
-          style={styles.bookmarkIcon}
-        />
+        <Image source={isBookmarked ? require('../assets/bookmarkActive.png') : require('../assets/bookmarkInactive.png')} style={styles.bookmarkIcon} />
       </TouchableOpacity>
 	  <View style={styles.priceContainer}>
     	<Image source={require('../assets/Vectorprice.png')} style={styles.icon} />
