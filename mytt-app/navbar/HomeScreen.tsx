@@ -4,7 +4,7 @@ import { Program } from '../models';
 import ProgramCard from '../components/ProgramCard';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Picker } from '@react-native-picker/picker';
+import { Dropdown } from 'react-native-element-dropdown';
 
 
 
@@ -100,15 +100,16 @@ const HomeScreen = () => {
       <View style={styles.topBar}>
         {/* Profile and Notifications */}
       </View>
-      <Picker
-        selectedValue={selectedLocation}
-        onValueChange={(itemValue) =>
-            setSelectedLocation(itemValue)
-        }>
-        {locations.map((location) => (
-            <Picker.Item key={location} label={location} value={location} />
-        ))}
-      </Picker>
+
+      <Dropdown
+        style={{margin: 10}}
+        data={locations.map(location => ({label: location, value: location}))}
+        placeholder={selectedLocation} // updated line
+        searchPlaceholder="Search location"
+        labelField="label"
+        valueField="value"
+        onChange={(selectedItem) => setSelectedLocation(selectedItem.label)}
+        />
 
       <TextInput
         style={styles.searchBar}
