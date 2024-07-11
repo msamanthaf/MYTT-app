@@ -9,8 +9,13 @@ import HomeScreen from './navbar/HomeScreen';
 import CalendarScreen from './navbar/CalendarScreen'; 
 import ProfileScreen from './navbar/ProfileScreen'; 
 import ProgramDetails from './screens/ProgramDetails';
-
-
+import { Image } from 'react-native';
+import HomeIcon from './assets/Vectorhome.png';
+import HomeInactive from './assets/homeInactive.png';
+import CalendarIcon from './assets/Vectorcalendar.png';
+import CalendarInactive from './assets/calendarInactive.png';
+import ProfileIcon from './assets/Vectorprofile.png';
+import ProfileInactive from './assets/profileInactive.png';
 
 const Stack = createStackNavigator();
 
@@ -46,11 +51,28 @@ export default function App() {
 			{isLoaded ? (
 				isLoggedIn ? (
 					<NavigationContainer>
-					<Tab.Navigator screenOptions={{headerShown: false}}>
-					  <Tab.Screen name="Home" component={HomeStack} />
-					  <Tab.Screen name="Calendar" component={CalendarScreen} />
-					  <Tab.Screen name="Profile" component={ProfileScreen} />
-					</Tab.Navigator>
+					<Tab.Navigator
+  screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused}) => {
+      let icon;
+
+      if (route.name === 'Home') {
+        icon = focused ? <Image source={HomeIcon} style={{ width: 24, height: 24 }} /> : <Image source={HomeInactive} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      } else if (route.name === 'Calendar') {
+        icon = focused ? <Image source={CalendarIcon} style={{ width: 24, height: 24 }} /> : <Image source={CalendarInactive} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      } else if (route.name === 'Profile') {
+        icon = focused ? <Image source={ProfileIcon} style={{ width: 24, height: 24 }} /> : <Image source={ProfileInactive} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      }
+
+      return icon;
+    },
+	headerShown: false
+  })}
+>
+  <Tab.Screen name="Home" component={HomeStack} />
+  <Tab.Screen name="Calendar" component={CalendarScreen} />
+  <Tab.Screen name="Profile" component={ProfileScreen} />
+</Tab.Navigator>
 					<StatusBar style="auto" />
 				  </NavigationContainer>
 				) : (
