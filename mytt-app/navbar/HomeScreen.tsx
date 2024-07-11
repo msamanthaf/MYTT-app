@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { Program } from '../models';
-import ProgramCard from '../components/ProgramCard';
+import ProgramCard from '../componets/ProgramCard';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+
+export type RootStackParamList = {
+    Home: undefined;
+    ProgramDetails: { program: Program };
+};
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const programs: Program[] = [
     {
@@ -45,6 +54,7 @@ const programs: Program[] = [
 const HomeScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const navigation = useNavigation<HomeScreenNavigationProp>();  // prop navigation
   const categories = [
     'Robotics',
     'Coding',
@@ -97,10 +107,25 @@ const HomeScreen = () => {
         contentContainerStyle={styles.categoriesList}
       />
 
-      {filteredPrograms.map((program) => (
-        <ProgramCard key={program.id} program={program} />
-      ))}
+
+
+        {filteredPrograms.map((program) => (
+        <TouchableOpacity
+            key={program.id}
+            onPress={() => {
+            console.log('Trying to navigate to ProgramDetails with program:', program);
+            navigation.navigate('ProgramDetails', { program });
+            }}
+        >
+            <ProgramCard program={program} />
+        </TouchableOpacity>
+        ))}
+                
+        
+        
+    
     </ScrollView>
+
   );
 };
 
