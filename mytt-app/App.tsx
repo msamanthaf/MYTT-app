@@ -1,6 +1,7 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
+import React, { useState, useEffect } from "react";
+import SplashScreen from "./components/SplashScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,8 +10,8 @@ import CalendarScreen from './navbar/CalendarScreen';
 import ProfileScreen from './navbar/ProfileScreen'; 
 import ProgramDetails from './screens/ProgramDetails';
 
-// Define the tab navigator
-const Tab = createBottomTabNavigator();
+
+
 const Stack = createStackNavigator();
 
 function HomeStack() {
@@ -22,24 +23,43 @@ function HomeStack() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Calendar" component={CalendarScreen} />
-        <Tab.Screen name="Home" component={HomeStack} /> 
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+export default function App() {
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const Tab = createBottomTabNavigator();
+  
+
+	const loginWithGoogle = () => {
+		setIsLoggedIn(true);
+	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoaded(true);
+		}, 2000);
+	}, []);
+
+	return (
+		<View style={{ flex: 1, backgroundColor: "#2166DE" }}>
+			{isLoaded ? (
+				isLoggedIn ? (
+					<NavigationContainer>
+					<Tab.Navigator>
+					  <Tab.Screen name="Home" component={HomeScreen} />
+					  <Tab.Screen name="Calendar" component={CalendarScreen} />
+					  <Tab.Screen name="Profile" component={ProfileScreen} />
+					</Tab.Navigator>
+					<StatusBar style="auto" />
+				  </NavigationContainer>
+				) : (
+					<SplashScreen loginWithGoogle={loginWithGoogle} />
+				)
+			) : (
+				<SplashScreen loginWithGoogle={loginWithGoogle}/>
+			)}
+			<StatusBar style="auto" />
+		</View>
+	);
+}
