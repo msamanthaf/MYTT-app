@@ -47,7 +47,7 @@ export default function App() {
 				isLoggedIn ? (
 					<NavigationContainer>
 					<Tab.Navigator>
-					  <Tab.Screen name="Home" component={HomeScreen} />
+					  <Tab.Screen name="Home" component={HomeStack} />
 					  <Tab.Screen name="Calendar" component={CalendarScreen} />
 					  <Tab.Screen name="Profile" component={ProfileScreen} />
 					</Tab.Navigator>
