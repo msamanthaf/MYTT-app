@@ -46,7 +46,7 @@ export default function App() {
 			{isLoaded ? (
 				isLoggedIn ? (
 					<NavigationContainer>
-					<Tab.Navigator>
+					<Tab.Navigator screenOptions={{headerShown: false}}>
 					  <Tab.Screen name="Home" component={HomeStack} />
 					  <Tab.Screen name="Calendar" component={CalendarScreen} />
 					  <Tab.Screen name="Profile" component={ProfileScreen} />
