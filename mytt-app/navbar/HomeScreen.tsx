@@ -6,11 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Dropdown } from 'react-native-element-dropdown';
 
-
-
 export type RootStackParamList = {
     Home: undefined;
     ProgramDetails: { program: Program };
+    RegistrationScreen: undefined;
 };
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -144,10 +143,7 @@ const HomeScreen = () => {
         {filteredPrograms.map((program) => (
         <TouchableOpacity
             key={program.id}
-            onPress={() => {
-            console.log('Trying to navigate to ProgramDetails with program:', program);
-            navigation.navigate('ProgramDetails', { program });
-            }}
+            onPress={() => {navigation.navigate('ProgramDetails', { program });}}
         >
             <ProgramCard program={program} />
         </TouchableOpacity>

@@ -1,14 +1,23 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native';
 import { Program, ProgramHoster } from '../models';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../navbar/HomeScreen';
+import RegistrationScreen from '../Registration';
+import { useNavigation } from '@react-navigation/native';
+
+
+type ProgramDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'ProgramDetails'>;
 
 const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
-  const program: Program = route.params.program;
+    const program: Program = route.params.program;
   const host: ProgramHoster = {
     name: 'Jane Doe',
     email: 'jane.doe@example.com',
     number: '555-1234',
   };
+  const navigation = useNavigation<ProgramDetailsNavigationProp>();
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>Program Detail</Text>
@@ -29,7 +38,7 @@ const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
           <Text>{host.email}</Text>
           <Text>{host.number}</Text>
         </View>
-        <Button title="Register" onPress={() => {}} />
+        <Button title="Register" onPress={() => navigation.navigate('RegistrationScreen')} />
       </View>
     </ScrollView>
   );
