@@ -9,6 +9,7 @@ import CalendarScreen from './navbar/CalendarScreen';
 import ProfileScreen from './navbar/ProfileScreen'; 
 
 export default function App() {
+
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const Tab = createBottomTabNavigator();
