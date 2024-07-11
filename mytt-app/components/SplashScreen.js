@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, Animated, Easing } from "react-native";
+import { View, Image, StyleSheet, Animated, Easing } from "react-native";
 import * as Font from "expo-font";
 import { GoogleButton } from "./GoogleButton";
 
