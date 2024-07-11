@@ -6,8 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Dropdown } from 'react-native-element-dropdown';
 
-
-
 export type RootStackParamList = {
     Home: undefined;
     ProgramDetails: { program: Program };
