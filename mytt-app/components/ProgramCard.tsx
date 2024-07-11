@@ -1,11 +1,23 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React,  { useState }  from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Program } from '../models';
 
 const ProgramCard: React.FC<{ program: Program }> = ({ program }) => {
+	const [isBookmarked, setIsBookmarked] = useState(program.bookmark);
+
+	const toggleBookmark = () => {
+	  setIsBookmarked(!isBookmarked);
+	};
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: program.photoUri }} style={styles.cardImage} />
+	  <TouchableOpacity style={styles.bookmarkButton} onPress={toggleBookmark}>
+        <Image
+          source={isBookmarked ? require('../assets/bookmarkActive.png') : require('../assets/bookmarkInactive.png')}
+          style={styles.bookmarkIcon}
+        />
+      </TouchableOpacity>
 	  <View style={styles.priceContainer}>
     	<Image source={require('../assets/Vectorprice.png')} style={styles.icon} />
     	<Text style={styles.cardPrice}>{program.price}</Text>
@@ -20,6 +32,7 @@ const ProgramCard: React.FC<{ program: Program }> = ({ program }) => {
         <View style={styles.cardRow}>
           <Image source={require('../assets/Vectorlocation.png')} style={styles.icon} />
           <Text style={styles.cardLocation}>{program.location}</Text>
+		  <Text style={styles.cardCapacity}>{program.capacity}</Text>
         </View>
       </View>
     </View>
@@ -78,11 +91,35 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
+  cardCapacity: {
+    marginLeft: 'auto',
+	color: '#717171',
+  },
   cardRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
 	alignContent:'center',
+  },
+  topLeft: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    zIndex: 1,
+  },
+  bookmarkButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    zIndex: 1,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingHorizontal: 6,
+	paddingVertical: 5
+  },
+  bookmarkIcon: {
+    width: 16,
+    height: 18,
   },
   icon: {
     width: 14,
