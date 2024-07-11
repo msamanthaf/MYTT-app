@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native'
 import { Program, ProgramHoster } from '../models';
 
 const ProgramDetails: React.FC<{ route: any }> = ({ route }) => {
-  const program: Program = route.params.program;
+    const program: Program = route.params.program;
   const host: ProgramHoster = {
     name: 'Jane Doe',
     email: 'jane.doe@example.com',
