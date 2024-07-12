@@ -169,7 +169,44 @@ export default class RegistrationScreen extends Component<Props, State> {
     }
 
     submitPressed() {
-        console.log("submitPressed this.state: ", this.state);
+        console.log("Submitting registration:", this.state);
+    
+        // Prepare the data for sending
+        const formData = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            marketingEmails: this.state.marketingEmails,
+            childFirstName: this.state.childFirstName,
+            childLastName: this.state.childLastName,
+            childAge: this.state.childAge,
+            childEthnicity: this.state.childEthnicity,
+            liabilityWaiver: this.state.liabilityWaiver,
+            phone: this.state.phone,
+            city: this.state.city,
+            zip: this.state.zip,
+            hearAboutUs: this.state.hearAboutUs,
+            emergencyContactName: this.state.emergencyContactName,
+            emergencyContactPhone: this.state.emergencyContactPhone,
+            emergencyContactRelationship: this.state.emergencyContactRelationship,
+        };
+    
+        fetch('http://localhost:3000/process-data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            // Handle success
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Handle error
+          });
         Keyboard.dismiss();
     }
 
