@@ -56,7 +56,7 @@ export default function App() {
         icon = focused ? <Image source={require('./assets/Vectorhome.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/homeInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
       } else if (route.name === 'Calendar') {
         icon = focused ? <Image source={require('./assets/Vectorcalendar.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/calendarInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
-      } else if (route.name === 'Bookmark') {
+      } else if (route.name === 'Bookmarks') {
         icon = focused ? <Image source={require('./assets/bookmarkActive.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/bookmarkGrey.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
       } else if (route.name === 'Profile') {
         icon = focused ? <Image source={require('./assets/Vectorprofile.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/profileInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
