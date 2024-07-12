@@ -15,6 +15,8 @@ const programs: Program[] = [
         location: 'Faith Community Center, IN',
 		capacity: 'Capacity: 28/32',
 		bookmark: true,
+		age: 'Ages 6-18',
+	  	mode: 'In-Person'
     },
 ];
 

@@ -25,6 +25,8 @@ const programs: Program[] = [
       location: 'MYTT Stem Center, IL',
 	  capacity: 'Capacity: 14/24',
 	  bookmark: false,
+	  age: 'Ages 9-13',
+	  mode: 'In-Person'
     },
     {
         id: 2,
@@ -37,6 +39,8 @@ const programs: Program[] = [
         location: 'MYTT Stem Center, IL',
 		capacity: 'Capacity: Full',
 		bookmark: false,
+		age: 'Ages 10-13',
+	  	mode: 'In-Person'
     },
     {
         id: 3,
@@ -49,6 +53,8 @@ const programs: Program[] = [
         location: 'Faith Community Center, IN',
 		capacity: 'Capacity: 28/32',
 		bookmark: false,
+		age: 'Ages 6-18',
+	  	mode: 'In-Person'
     },
     {
         id: 4,
@@ -61,6 +67,8 @@ const programs: Program[] = [
         location: 'MYTT Stem Center, IL',
 		capacity: 'Capacity: 21/24',
 		bookmark: false,
+		age: 'Ages 9-12',
+	  	mode: 'In-Person'
     },
 	{
         id: 5,
@@ -73,6 +81,8 @@ const programs: Program[] = [
         location: 'MYTT Stem Center, IL',
 		capacity: 'Capacity: Full',
 		bookmark: false,
+		age: 'Ages 9-13',
+	  	mode: 'In-Person'
     },
   ];
 
