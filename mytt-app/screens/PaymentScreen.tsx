@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import navigation hooks
+import { Ionicons } from '@expo/vector-icons';
 
 const PaymentScreen = () => {
   const navigation = useNavigation(); // Navigation instance
@@ -19,6 +20,9 @@ const PaymentScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
+	  <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
         <Text style={styles.header}>Confirm Payment</Text>
 		<View style={styles.logoContainer}>
           <Image source={require('../assets/mastercard.png')} style={styles.logo} />
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   confirmButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#A1DD0C',
     borderRadius: 5,
     paddingVertical: 15,
     paddingHorizontal: 30,
@@ -109,6 +113,12 @@ const styles = StyleSheet.create({
     height: 20,
     marginHorizontal: 10,
   },
+  backButton: {
+	position: 'absolute',
+	top: 35,
+	left: 10,
+	zIndex: 1,
+},
 });
 
 export default PaymentScreen;
