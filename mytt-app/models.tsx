@@ -9,7 +9,8 @@ export interface Program {
     category: string;
     age?: string;             
     location: string;        
-    capacity?: number;        
+    capacity?: string;
+	bookmark?: boolean;        
 }
   
 export interface ProgramHoster {
