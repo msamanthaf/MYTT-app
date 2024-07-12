@@ -20,6 +20,8 @@ const mockPrograms: Program[] = [
     location: 'MYTT Stem Center, IL',
     capacity: 'Capacity: 14/24',
     bookmark: false,
+	age: 'Ages 9-13',
+	mode: 'In-Person',
   },
   // Additional programs can be added here
 ];

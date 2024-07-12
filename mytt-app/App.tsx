@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 
 function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       	<Stack.Screen name="Home" component={HomeScreen} />
       	<Stack.Screen name="ProgramDetails" component={ProgramDetails} />
         <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
@@ -43,7 +43,7 @@ export default function App() {
 	}, []);
 
 	return (
-		<View style={{ flex: 1, backgroundColor: "#2166DE" }}>
+		<View style={{ flex: 1, backgroundColor: "#2166DE" , marginTop: 50}}>
 			{isLoaded ? (
 				isLoggedIn ? (
 					<NavigationContainer>

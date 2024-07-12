@@ -7,7 +7,8 @@ export interface Program {
     price: string;
     photoUri: string;
     category: string;
-    age?: string;             
+    age: string; 
+	mode: string;             
     location: string;        
     capacity?: string;
 	bookmark?: boolean;        
