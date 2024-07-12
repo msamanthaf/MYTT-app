@@ -138,7 +138,7 @@ const HomeScreen = () => {
 
       <TextInput
         style={styles.searchBar}
-        placeholder="Search programs and events"
+        placeholder="🔍 Search programs and events"
         value={searchQuery}
         onChangeText={setSearchQuery}
         clearButtonMode="while-editing"
