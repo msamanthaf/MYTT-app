@@ -30,15 +30,6 @@ const BookmarkScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContainer}
       />
-	   <Text style={styles.registered}>Registered Programs</Text>
-      <FlatList
-        data={programs.filter(program => program.bookmark)}
-        renderItem={({ item }) => (
-          <ProgramCard program={item} /> // Assuming ProgramCard is a component that displays program details
-        )}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContainer}
-      />
     </View>
   );
 };
@@ -50,14 +41,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   bookmarked:{
-	color:'#2166DE',
-	marginTop: 50,
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  registered:{
-	color:'#A1DD0C',
 	marginTop: 50,
     fontSize: 20,
     fontWeight: 'bold',
