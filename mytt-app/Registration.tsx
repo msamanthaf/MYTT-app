@@ -1,5 +1,5 @@
 import React, {Component, createRef, RefObject} from 'react';
-import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Keyboard, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CheckBox from 'react-native-check-box';
 import {Picker} from '@react-native-picker/picker';
@@ -15,12 +15,12 @@ type State = {
     childAge: number, // TODO: turn this into an enum
     childEthnicity: string, // TODO: turn this into an enum
     liabilityWaiver: boolean,
-    phone: number,
+    phone: string,
     city: string,
     zip: string,
     hearAboutUs: string, // TODO: turn this into an enum
     emergencyContactName: string,
-    emergencyContactPhone: number,
+    emergencyContactPhone: string,
     emergencyContactRelationship: string, // TODO: enum
     isAgeDropdownFocused: boolean,
     activeIndex: number | null;
@@ -55,18 +55,17 @@ export default class RegistrationScreen extends Component<Props, State> {
             marketingEmails: false,
             childFirstName: '',
             childLastName: '',
-            childAge: 0,
+            childAge: 9,
             childEthnicity: '',
             liabilityWaiver: false,
-            phone: 0,
+            phone: '',
             city: '',
             zip: '',
             hearAboutUs: '',
             emergencyContactName: '',
-            emergencyContactPhone: 0,
+            emergencyContactPhone: '',
             emergencyContactRelationship: '',
             isAgeDropdownFocused: false,
-
             activeIndex: null,
         };
         this.submitPressed = this.submitPressed.bind(this);
@@ -169,7 +168,47 @@ export default class RegistrationScreen extends Component<Props, State> {
     }
 
     submitPressed() {
-        console.log("submitPressed this.state: ", this.state);
+        console.log("Submitting registration:", this.state);
+    
+        // Prepare the data for sending
+        const formData = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            marketingEmails: this.state.marketingEmails,
+            childFirstName: this.state.childFirstName,
+            childLastName: this.state.childLastName,
+            childAge: this.state.childAge,
+            childEthnicity: this.state.childEthnicity,
+            liabilityWaiver: this.state.liabilityWaiver,
+            phone: this.state.phone,
+            city: this.state.city,
+            zip: this.state.zip,
+            hearAboutUs: this.state.hearAboutUs,
+            emergencyContactName: this.state.emergencyContactName,
+            emergencyContactPhone: this.state.emergencyContactPhone,
+            emergencyContactRelationship: this.state.emergencyContactRelationship,
+        };
+    
+		const body = JSON.stringify(formData)
+		console.log("===============================================",body)
+        fetch('http://172.20.10.2:3000/process-data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: body,
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            // Handle success
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Handle error
+          });
+        Alert.alert("Success", "Payment recieved successfully.");
         Keyboard.dismiss();
     }
 
