@@ -7,8 +7,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './navbar/HomeScreen';
 import CalendarScreen from './navbar/CalendarScreen';
+import BookmarkScreen from './navbar/BookmarkScreen';
 import ProfileScreen from './navbar/ProfileScreen';
 import ProgramDetails from './screens/ProgramDetails';
+import { Image } from 'react-native';
 import RegistrationScreen from "./Registration";
 
 const Stack = createStackNavigator();
@@ -45,11 +47,31 @@ export default function App() {
 			{isLoaded ? (
 				isLoggedIn ? (
 					<NavigationContainer>
-					<Tab.Navigator>
-					  <Tab.Screen name="Home" component={HomeStack} />
-					  <Tab.Screen name="Calendar" component={CalendarScreen} />
-					  <Tab.Screen name="Profile" component={ProfileScreen} />
-					</Tab.Navigator>
+					<Tab.Navigator
+  screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused}) => {
+      let icon;
+
+      if (route.name === 'Home') {
+        icon = focused ? <Image source={require('./assets/Vectorhome.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/homeInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      } else if (route.name === 'Calendar') {
+        icon = focused ? <Image source={require('./assets/Vectorcalendar.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/calendarInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      } else if (route.name === 'Bookmarks') {
+        icon = focused ? <Image source={require('./assets/bookmarkActive.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/bookmarkGrey.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      } else if (route.name === 'Profile') {
+        icon = focused ? <Image source={require('./assets/Vectorprofile.png')} style={{ width: 24, height: 24 }} /> : <Image source={require('./assets/profileInactive.png')} style={{ width: 24, height: 24, opacity: 0.5 }} />;
+      }
+
+      return icon;
+    },
+	headerShown: false
+  })}
+>
+  <Tab.Screen name="Home" component={HomeStack} />
+  <Tab.Screen name="Calendar" component={CalendarScreen} />
+  <Tab.Screen name="Bookmarks" component={BookmarkScreen} />
+  <Tab.Screen name="Profile" component={ProfileScreen} />
+</Tab.Navigator>
 					<StatusBar style="auto" />
 				  </NavigationContainer>
 				) : (
