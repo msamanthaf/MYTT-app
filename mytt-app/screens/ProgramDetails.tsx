@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     helpTitle: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         marginBottom: 5,
     },
