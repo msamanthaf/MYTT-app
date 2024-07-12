@@ -15,12 +15,12 @@ type State = {
     childAge: number, // TODO: turn this into an enum
     childEthnicity: string, // TODO: turn this into an enum
     liabilityWaiver: boolean,
-    phone: number,
+    phone: string,
     city: string,
     zip: string,
     hearAboutUs: string, // TODO: turn this into an enum
     emergencyContactName: string,
-    emergencyContactPhone: number,
+    emergencyContactPhone: string,
     emergencyContactRelationship: string, // TODO: enum
     isAgeDropdownFocused: boolean,
     activeIndex: number | null;
@@ -55,18 +55,17 @@ export default class RegistrationScreen extends Component<Props, State> {
             marketingEmails: false,
             childFirstName: '',
             childLastName: '',
-            childAge: 0,
+            childAge: 9,
             childEthnicity: '',
             liabilityWaiver: false,
-            phone: 0,
+            phone: '',
             city: '',
             zip: '',
             hearAboutUs: '',
             emergencyContactName: '',
-            emergencyContactPhone: 0,
+            emergencyContactPhone: '',
             emergencyContactRelationship: '',
             isAgeDropdownFocused: false,
-
             activeIndex: null,
         };
         this.submitPressed = this.submitPressed.bind(this);
@@ -191,12 +190,14 @@ export default class RegistrationScreen extends Component<Props, State> {
             emergencyContactRelationship: this.state.emergencyContactRelationship,
         };
     
-        fetch('http://localhost:3000/process-data', {
+		const body = JSON.stringify(formData)
+		console.log("===============================================",body)
+        fetch('http://172.20.10.2:3000/process-data', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: body,
           })
           .then(response => response.json())
           .then(data => {
