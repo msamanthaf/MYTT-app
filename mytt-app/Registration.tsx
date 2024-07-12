@@ -1,5 +1,5 @@
 import React, {Component, createRef, RefObject} from 'react';
-import { Button, Keyboard, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Keyboard, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CheckBox from 'react-native-check-box';
 import {Picker} from '@react-native-picker/picker';
@@ -208,6 +208,7 @@ export default class RegistrationScreen extends Component<Props, State> {
             console.error('Error:', error);
             // Handle error
           });
+        Alert.alert("Success", "Payment recieved successfully.");
         Keyboard.dismiss();
     }
 
