@@ -68,7 +68,7 @@ const programs: Program[] = [
 		capacity: 'Capacity: 21/24',
 		bookmark: false,
 		age: 'Ages 9-12',
-	  	mode: 'In-Person'
+	  	mode: 'Online'
     },
 	{
         id: 5,
@@ -82,7 +82,7 @@ const programs: Program[] = [
 		capacity: 'Capacity: Full',
 		bookmark: false,
 		age: 'Ages 9-13',
-	  	mode: 'In-Person'
+	  	mode: 'Online'
     },
   ];
 

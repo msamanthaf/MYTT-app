@@ -10,6 +10,8 @@ import CalendarScreen from './navbar/CalendarScreen';
 import BookmarkScreen from './navbar/BookmarkScreen';
 import ProfileScreen from './navbar/ProfileScreen';
 import ProgramDetails from './screens/ProgramDetails';
+import PaymentScreen from './screens/PaymentScreen';
+import SuccessScreen from './screens/SuccessScreen';
 import { Image } from 'react-native';
 import RegistrationScreen from "./Registration";
 
@@ -21,6 +23,8 @@ function HomeStack() {
       	<Stack.Screen name="Home" component={HomeScreen} />
       	<Stack.Screen name="ProgramDetails" component={ProgramDetails} />
         <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
+		<Stack.Screen name="Payment" component={PaymentScreen} />
+		<Stack.Screen name="Success" component={SuccessScreen} />
     </Stack.Navigator>
   );
 }

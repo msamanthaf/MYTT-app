@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   bookmarked:{
-	marginTop: 50,
+	marginTop: 20,
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
