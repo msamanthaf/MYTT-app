@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Alert, Button, Keyboard, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Keyboard, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CheckBox from 'react-native-check-box';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
 
 type Props = { navigation: StackNavigationProp<any>; };
 
@@ -94,6 +95,9 @@ export default class RegistrationScreen extends Component<Props, State> {
                 keyboardDismissMode="on-drag"
                 enableOnAndroid={true}
             >
+				<TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.navigate('Home')}>
+                <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Register</Text>
                 </View>
@@ -269,7 +273,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     sectionHeader: {
-        backgroundColor: '#F0F0F0',
+        backgroundColor: '#2166DE',
         paddingVertical: 8,
         paddingHorizontal: 12,
         marginTop: 20,
@@ -279,6 +283,7 @@ const styles = StyleSheet.create({
     sectionHeaderText: {
         fontSize: 18,
         fontWeight: 'bold',
+		color:'white'
     },
     inputContainer: {
         marginBottom: 16,
@@ -340,4 +345,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
     },
+	backButton: {
+	position: 'absolute',
+	top: 20,
+	left: 10,
+	zIndex: 1,
+},
 });
