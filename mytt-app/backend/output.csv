@@ -1,2 +1,2 @@
-"firstName","lastName","email","marketingEmails","childFirstName","childLastName","childAge","childEthnicity","liabilityWaiver","phone","city","zip","hearAboutUs","emergencyContactName","emergencyContactPhone","emergencyContactRelationship"
-"asdjisadjisaj","ijasidjsaidj","ijasidjsaijdij",false,"aisdjisajd","ijaisdjisajdi",0,"Black",false,"2139712983","Endinaid","30300","Google","ajsidjasidj","1023901293","Mother"
+"guardianName","guardianEmail","firstName","lastName","age","gender","language","phone","city","zip","consent","optIn"
+"Mom","Momail","Dwayne","Johnson",6,"Male","English","222","Van","V6S",true,false
