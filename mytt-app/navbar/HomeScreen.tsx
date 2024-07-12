@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image } from 'react-native';
 import { Program } from '../models';
 import ProgramCard from '../components/ProgramCard';
 import { useNavigation } from '@react-navigation/native';
@@ -111,7 +111,7 @@ const HomeScreen = () => {
       </View>
 
       <Dropdown
-        style={{margin: 10}}
+        style={{margin: 10, width: '56%'}}
         data={locations.map(location => ({label: location, value: location}))}
         placeholder={selectedLocation} // updated line
         searchPlaceholder="Search location"
@@ -119,6 +119,16 @@ const HomeScreen = () => {
         valueField="value"
         onChange={(selectedItem) => setSelectedLocation(selectedItem.label)}
         />
+
+		<View style={styles.row}>
+        <Text style={styles.welcomeText}>Welcome,</Text>
+        <Text style={styles.username}>Guest</Text>
+		<Image
+          source={require('../assets/Vectornotification.png')}
+          style={styles.image}
+          resizeMode="contain" // Adjust as necessary
+        />
+      	</View>
 
       <TextInput
         style={styles.searchBar}
@@ -172,20 +182,42 @@ const styles = StyleSheet.create({
       flex: 1,
 	  backgroundColor: '#ffffff'
     },
+	row: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
     topBar: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: 10,
     },
+	welcomeText: {
+		fontSize: 24,
+		fontWeight: 'bold',
+		paddingVertical: 10,
+		marginLeft: 10
+	},
+	username: {
+		fontSize: 24,
+		fontWeight: 'bold',
+		paddingVertical: 10,
+		marginLeft: 10,
+		color: '#2166DE'
+	},
+	image:{
+		marginLeft: 150
+	},
     searchBar: {
       margin: 10,
       padding: 10,
-      borderRadius: 5,
-      backgroundColor: '#f0f0f0',
+      borderRadius: 12,
+	  borderWidth: 1, 
+	  borderColor: '#D1D1D1',
+	  height: 50
     },
     sectionTitle: {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: 'bold',
       marginLeft: 16,
       marginTop: 16,
