@@ -110,6 +110,12 @@ const HomeScreen = () => {
         {/* Profile and Notifications */}
       </View>
 
+	  <Image
+        source={require('../assets/headerBG.png')} // Replace with your image path
+        style={styles.backgroundImage}
+        resizeMode="cover" // Adjust as necessary
+      />
+
       <Dropdown
         style={{margin: 10, width: '56%'}}
         data={locations.map(location => ({label: location, value: location}))}
@@ -182,6 +188,14 @@ const styles = StyleSheet.create({
       flex: 1,
 	  backgroundColor: '#ffffff'
     },
+	backgroundImage: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		opacity: 0.8, // Adjust the opacity as needed
+	},
 	row: {
 		flexDirection: 'row',
 		alignItems: 'center',
