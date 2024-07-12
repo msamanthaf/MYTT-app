@@ -3,8 +3,9 @@ import { Alert, Button, Keyboard, StyleSheet, Text, TextInput, View } from 'reac
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CheckBox from 'react-native-check-box';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-type Props = {};
+type Props = { navigation: StackNavigationProp<any>; };
 
 type State = {
     guardianName: string,
@@ -81,6 +82,7 @@ export default class RegistrationScreen extends Component<Props, State> {
         } catch (error) {
             // Ignore errors silently
         }
+		this.props.navigation.navigate('Payment');
     };
 
     render() {

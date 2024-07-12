@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Program, ProgramHoster } from '../models';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navbar/HomeScreen';
